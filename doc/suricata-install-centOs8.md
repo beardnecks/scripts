@@ -1,19 +1,74 @@
 # Install Suricata on CentOS 8
 
 ```
-sudo yum update
-sudo yum install -y epel-release
-sudo yum config-manager --set-enabled PowerTools
-sudo yum -y install gcc libpcap-devel pcre-devel libyaml-devel file-devel \
-zlib-devel jansson-devel nss-devel libcap-ng-devel libnet-devel tar make \
-libnetfilter_queue-devel lua-devel libmaxminddb-devel rustc cargo lz4-devel \
-git python3 python3-pyyaml libtool gcc-c++
+yum update
+yum -y install dnf-plugins-core
+yum config-manager --set-enabled PowerTools
+yum -y install \
+                autoconf \
+                automake \
+                cargo-vendor \
+                diffutils \
+                file-devel \
+                gcc \
+                gcc-c++ \
+                git \
+                jansson-devel \
+                jq \
+                lua-devel \
+                libtool \
+                libyaml-devel \
+                libnfnetlink-devel \
+                libnetfilter_queue-devel \
+                libnet-devel \
+                libcap-ng-devel \
+                libevent-devel \
+                libmaxminddb-devel \
+                libpcap-devel \
+                libtool \
+                lz4-devel \
+                make \
+                nss-devel \
+                pcre-devel \
+                pkgconfig \
+                python3-devel \
+                python3-sphinx \
+                python3-yaml \
+                rust-toolset \
+                sudo \
+                which \
+                zlib-devel
+yum -y install \
+                texlive-latex \
+                texlive-cmap \
+                texlive-collection-latexrecommended \
+                texlive-fncychap \
+                texlive-titlesec \
+                texlive-tabulary \
+                texlive-framed \
+                texlive-wrapfig \
+                texlive-upquote \
+                texlive-capt-of \
+                texlive-needspace 
+cargo install --force cbindgen
+export PATH="$PATH:$HOME/.cargo/bin"
+pip install PyYAML
 
 git clone https://github.com/OISF/suricata.git
 cd suricata
-git clone https://github.com/OISF/libhtp.git
+git clone https://github.com/OISF/libhtp -b 0.5.x
+cd suricata-update
+curl -L \
+              https://github.com/OISF/suricata-update/archive/master.tar.gz | \
+              tar zxvf - --strip-components=1
+cd ..
 ./autogen.sh
-./configure
-make
-sudo make install
+./configure --enable-unittests \
+                --enable-debug \
+                --enable-lua \
+                --enable-geoip \
+                --enable-profiling \
+                --enable-profiling-locks
+make -j 8
+make check
 ```
