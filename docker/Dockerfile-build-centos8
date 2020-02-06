@@ -37,6 +37,6 @@ RUN yum update \
                 which \
                 zlib-devel
 RUN cargo install --force cbindgen
-ENV PATH="${HOME}/.cargo/bin:${PATH}"
+ENV PATH="/root/.cargo/bin:${PATH}"
 
 
