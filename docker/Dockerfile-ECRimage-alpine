@@ -1,37 +1,39 @@
 FROM alpine
+RUN apk update
+RUN apk add ca-certificates
 RUN apk add \
                 autoconf \
                 automake \
-                cargo-vendor \
+                cargo \
                 diffutils \
-                file-devel \
+                file-dev \
                 gcc \
-                gcc-c++ \
+                g++ \
                 git \
-                jansson-devel \
+                jansson-dev \
                 jq \
-                lua-devel \
+                lua-dev \
                 libtool \
-                libyaml-devel \
-                libnfnetlink-devel \
-                libnetfilter_queue-devel \
-                libnet-devel \
-                libcap-ng-devel \
-                libevent-devel \
-                libmaxminddb-devel \
-                libpcap-devel \
+                yaml-dev \
+                libnfnetlink-dev \
+                libnetfilter_queue-dev \
+                libnet-dev \
+                libcap-ng-dev \
+                libevent-dev \
+                libmaxminddb-dev \
+                libpcap-dev \
                 libtool \
-                lz4-devel \
+                lz4-dev \
                 make \
-                nss-devel \
-                pcre-devel \
+                nss-dev \
+                pcre-dev \
                 pkgconfig \
-                python3-devel \
-                python3-sphinx \
-                python3-yaml \
-                rust-toolset \
+                python3-dev \
+		sphinx \
+		py-yaml \
+                rust \
                 sudo \
                 which \
-                zlib-devel
+                zlib-dev
 RUN cargo install --force cbindgen
 ENV PATH="/root/.cargo/bin:${PATH}"
