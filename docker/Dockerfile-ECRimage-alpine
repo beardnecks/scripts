@@ -1,0 +1,37 @@
+FROM alpine
+RUN apk add \
+                autoconf \
+                automake \
+                cargo-vendor \
+                diffutils \
+                file-devel \
+                gcc \
+                gcc-c++ \
+                git \
+                jansson-devel \
+                jq \
+                lua-devel \
+                libtool \
+                libyaml-devel \
+                libnfnetlink-devel \
+                libnetfilter_queue-devel \
+                libnet-devel \
+                libcap-ng-devel \
+                libevent-devel \
+                libmaxminddb-devel \
+                libpcap-devel \
+                libtool \
+                lz4-devel \
+                make \
+                nss-devel \
+                pcre-devel \
+                pkgconfig \
+                python3-devel \
+                python3-sphinx \
+                python3-yaml \
+                rust-toolset \
+                sudo \
+                which \
+                zlib-devel
+RUN cargo install --force cbindgen
+ENV PATH="/root/.cargo/bin:${PATH}"
