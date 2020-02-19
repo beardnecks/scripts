@@ -1,6 +1,5 @@
 FROM centos:centos8
-RUN yum update \
-  && yum -y install dnf-plugins-core \
+RUN yum -y install dnf-plugins-core \
   && yum config-manager --set-enabled PowerTools \
   && yum -y install \
                 autoconf \
@@ -37,6 +36,7 @@ RUN yum update \
                 which \
                 zlib-devel
 RUN cargo install --force cbindgen
+RUN alternatives --set python /usr/bin/python3
 ENV PATH="/root/.cargo/bin:${PATH}"
 
 
