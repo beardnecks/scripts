@@ -5,6 +5,7 @@ RUN yum -y install dnf-plugins-core \
                 autoconf \
                 automake \
                 cargo-vendor \
+                clang \
                 diffutils \
                 file-devel \
                 gcc \
