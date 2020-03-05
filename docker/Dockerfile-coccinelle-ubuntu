@@ -1,11 +1,12 @@
 FROM ubuntu:18.04
-RUN apt update && /
+RUN apt-get update && \
     apt-get install -y \
                 libpcre3 \
                 libpcre3-dev \
                 build-essential \
                 autoconf \
                 automake \
+                curl \
                 git \
                 jq \
                 libtool \
@@ -33,7 +34,7 @@ RUN apt update && /
                 software-properties-common \
                 zlib1g \
                 zlib1g-dev
-RUN add-apt-repository -y ppa:npalix/coccinelle && /
+RUN add-apt-repository -y ppa:npalix/coccinelle && \
       apt-get install -y coccinelle
 RUN cargo install --force cbindgen
 ENV PATH="/root/.cargo/bin:${PATH}"
