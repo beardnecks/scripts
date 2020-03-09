@@ -46,7 +46,7 @@ RUN yum -y install dnf-plugins-core \
     && rm -rf /var/cache/yum
 
 RUN gem install fpm
-RUN curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain stable -y
+RUN curl https://sh.rustup.rs -sSf | sh -s -- --profile minimal --default-toolchain stable --component clippy --component rustfmt -y
 ENV PATH="/root/.cargo/bin:${PATH}"
 RUN cargo install --force cbindgen
 RUN alternatives --set python /usr/bin/python3
