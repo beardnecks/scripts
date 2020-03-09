@@ -1,0 +1,53 @@
+FROM centos:centos8
+RUN yum -y install dnf-plugins-core \
+  && yum config-manager --set-enabled PowerTools \
+  && yum -y install \
+            autoconf \
+            automake \
+            clang \
+            diffutils \
+            file-devel \
+            gcc \
+            gcc-c++ \
+            gem \
+            git \
+            jansson-devel \
+            jq \
+            libcap-ng-devel \
+            libevent-devel \
+            libmaxminddb-devel \
+            libnet-devel \
+            libnetfilter_queue-devel \
+            libnfnetlink-devel \
+            libpcap-devel \
+            libtool \
+            libtool \
+            libyaml-devel \
+            lua-devel \
+            lz4-devel \
+            make \
+            nss-devel \
+            pcre-devel \
+            pkgconfig \
+            python3-devel \
+            python3-sphinx \
+            python3-yaml \
+            rpm-build \
+            ruby \
+            ruby-devel \
+            ruby-irb \
+            ruby-libs \
+            rubygems \
+            rust-toolset \
+            sudo \
+            which \
+            zlib-devel \
+    && yum clean all \
+    && rm -rf /var/cache/yum
+
+RUN gem install fpm
+RUN curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain stable -y
+ENV PATH="/root/.cargo/bin:${PATH}"
+RUN cargo install --force cbindgen
+RUN alternatives --set python /usr/bin/python3
+
